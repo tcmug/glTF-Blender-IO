@@ -176,6 +176,13 @@ class ExportGLTF2_Base:
         default='',
     )
 
+    export_convert_bump_maps: BoolProperty(
+        name='Convert bump maps',
+        description=('Convert bumps maps used as a normal map to a normal map'
+        ),
+        default=False,
+    )
+
     export_keep_originals: BoolProperty(
         name='Keep original',
         description=('Keep original textures files if possible. '
@@ -540,6 +547,7 @@ class ExportGLTF2_Base:
             self.export_texture_dir,
         )
         export_settings['gltf_keep_original_textures'] = self.export_keep_originals
+        export_settings['gltf_convert_bump_maps'] = self.export_convert_bump_maps
 
         export_settings['gltf_format'] = self.export_format
         export_settings['gltf_image_format'] = self.export_image_format
@@ -684,6 +692,7 @@ class GLTF_PT_export_main(bpy.types.Panel):
 
         layout.prop(operator, 'export_copyright')
         layout.prop(operator, 'will_save_settings')
+        layout.prop(operator, 'export_convert_bump_maps')
 
 
 class GLTF_PT_export_include(bpy.types.Panel):
